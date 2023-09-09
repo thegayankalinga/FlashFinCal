@@ -58,5 +58,6 @@ struct HomeScreen: View {
 struct ViewOne_Previews: PreviewProvider {
     static var previews: some View {
         HomeScreen()
+            .environment(\.colorScheme, .light)
     }
 }
