@@ -13,22 +13,30 @@ struct LoanView: View {
     @StateObject var loan: Loan
     
     @State private var showingAlert = false
-    @State private var showingAmortization = false
     @State private var showingHelpSheet = false
-    @State private var errorMassage = ""
     @State private var isSavedSelected = false
     
     @FocusState private var isFocused: FocusedField?
     
     enum FocusedField{
-        case presentvalue, interestrate, paymentamount, futurevalue
+        case borrowingAmount,
+             annualInterestRate,
+             termsInMonths,
+             paymentPerYear,
+             installmentAmount,
+             interestSubsidicedPercentage,
+             paymentStartDate
     }
     
     var body: some View {
         NavigationStack{
+            InforCardView(card: Card(icon: "info.square", text: "Please Keep the field you want the value empty"))
+                .padding(.top, 40)
+                .padding(.horizontal, 10)
             ScrollView{
+
                 VStack{
-                    
+                    Text("Hi")
                 }
             }
             .navigationTitle("Loan Calculator")

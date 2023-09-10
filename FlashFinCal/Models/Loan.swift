@@ -10,7 +10,7 @@ import Foundation
 
 class Loan : ObservableObject{
     
-    var borrowedAmount: Double?
+    var borrowingAmount: Double?
     var annualInterestRate: Double?
     var termInMonths: Int?
     var paymentsPerYear: Int?
@@ -20,7 +20,7 @@ class Loan : ObservableObject{
     var paymentStartDate: Date = Date.now
     
     init(borrowedAmount: Double, annualInterestRate: Double, termInMonths: Int, paymentsPerYear: Int, installmentAmount: Double, paymentMadeAtEnd: Bool, interestSubsidicedPercentage: Double, paymentStartDate: Date) {
-        self.borrowedAmount = borrowedAmount
+        self.borrowingAmount = borrowedAmount
         self.annualInterestRate = annualInterestRate
         self.termInMonths = termInMonths
         self.paymentsPerYear = paymentsPerYear
