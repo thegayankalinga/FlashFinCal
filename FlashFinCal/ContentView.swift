@@ -10,41 +10,27 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         
-            TabView{
-                HomeScreen()
-                    .tabItem{
-                        Label("Home", systemImage: "face.dashed.fill")
-                    }
-                
-                Saving()
-                    .tabItem{
-                        Label("Savings", systemImage: "trophy.circle.fill").font(.largeTitle)
-                        
-                    }
-                    
-                Loan()
-                    .tabItem{
-                        Label("Loans", systemImage: "bolt.shield.fill")
-                    }
-                
-                Mortgage()
-                    .tabItem{
-                        Label("Mortgage", systemImage: "house.circle.fill")
-                    }
-                
-            }
-            .navigationTitle("Flash FinCal")
-            .toolbar{
-                ToolbarItem(placement: .navigationBarTrailing){
-                    Button{
-                        //NavigationLink("Help", destination: HistoryView())
-                    } label: {
-                        Image(systemName: "questionmark.circle.fill")
-                            .font(.system(.title2))
-                        
-                    }
+        TabView{
+            HomeScreen()
+                .tabItem{
+                    Label("Home", systemImage: "face.dashed.fill")
                 }
             
+            Text("Saving")
+                .tabItem{
+                    Label("Savings", systemImage: "trophy.circle.fill").font(.largeTitle)
+                    
+                }
+                
+            LoanView(loan: Loan())
+                .tabItem{
+                    Label("Loans", systemImage: "bolt.shield.fill")
+                }
+            
+            Text("Mortgage")
+                .tabItem{
+                    Label("Mortgage", systemImage: "house.circle.fill")
+                }
             
         }
     }
