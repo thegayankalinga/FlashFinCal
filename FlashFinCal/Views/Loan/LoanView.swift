@@ -52,14 +52,17 @@ struct LoanView: View {
                             bindingField: $borrowingAmount,
                             placeholder: "Borrowing Amount",
                             promptText: "",
-                            isSecure: false)
-                            .textFieldStyle(
+                            isSecure: false
+                        )
+                            
+                        .multilineTextAlignment(.trailing)
+                        .textFieldStyle(
                                 GradientTextFieldBackground(
                                     systemImageString: "creditcard.circle.fill",
                                     currencyField: true,
                                     colorList: [.black],
                                     value: $borrowingAmount))
-                            .numbersOnly($borrowingAmount, includeDecimal: true, digitAllowedAfterDecimal: 2)
+                        .numbersOnly($borrowingAmount, includeDecimal: true, digitAllowedAfterDecimal: 2)
                         
                         EntryField(bindingField: $annualInterestRate, placeholder: "Annual Interest Rate %", promptText: "", isSecure: false)
                     }
