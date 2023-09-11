@@ -15,26 +15,40 @@ struct Card {
 }
 
 struct InforCardView: View {
+    @Binding var showInfoCard: Bool
+    
     let card: Card
 
         var body: some View {
             ZStack {
-                RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .fill(AppCustomColors.lightYellow)
-                    .shadow(radius: 10)
+                RoundedRectangle(cornerRadius: 2, style: .continuous)
+                    .fill(AppCustomColors.lightBlue)
+                    .shadow(radius: 8)
                 
                 
-
+                
                 HStack {
                     Image(systemName: card.icon)
                         .symbolRenderingMode(.palette)
                         .foregroundStyle(.blue)
                         .font(.system(size: 24))
                     
-                    Text(card.text)
-                        .font(.body)
-                        .foregroundColor(.gray)
-                        .fixedSize(horizontal: false, vertical: true)
+                    VStack{
+                        HStack (alignment: .top){
+                            Text(card.text)
+                                .font(.callout)
+                                .foregroundColor(.gray)
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            Spacer()
+                            Button{
+                                print("close card button clicked")
+                                showInfoCard.toggle()
+                            }label: {
+                                Text("X")
+                            }
+                        }
+                    }
                 }
                 .padding(20)
                 .multilineTextAlignment(.center)
@@ -46,6 +60,6 @@ struct InforCardView: View {
 
 struct InforCardView_Previews: PreviewProvider {
     static var previews: some View {
-        InforCardView(card: Card.example)
+        InforCardView(showInfoCard: .constant(true), card: Card.example)
     }
 }

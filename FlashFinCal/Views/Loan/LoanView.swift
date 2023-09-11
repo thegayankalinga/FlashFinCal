@@ -13,10 +13,14 @@ struct LoanView: View {
     @StateObject var loan: Loan
     
     @State private var showingAlert = false
+    @State private var showHelpCard = true
     @State private var showingHelpSheet = false
     @State private var isSavedSelected = false
+    @State private var borrowingAmount = ""
+    @State private var annualInterestRate = ""
     
     @FocusState private var isFocused: FocusedField?
+
     
     enum FocusedField{
         case borrowingAmount,
@@ -30,14 +34,47 @@ struct LoanView: View {
     
     var body: some View {
         NavigationStack{
-            InforCardView(card: Card(icon: "info.square", text: "Please Keep the field you want the value empty"))
-                .padding(.top, 40)
-                .padding(.horizontal, 10)
+          
             ScrollView{
+                //Info card at first go
+                if(showHelpCard){
+                    withAnimation(.default.delay(20)){
+                        InforCardView(showInfoCard: $showHelpCard, card: Card(icon: "info.square", text: "Please Keep the field you want the value empty"))
+                            .padding(.top, 40)
+                            .padding(.horizontal, 10)
+                    }
 
-                VStack{
-                    Text("Hi")
                 }
+                
+                VStack{
+                    GroupBox("Loan Detail"){
+                        EntryField(
+                            bindingField: $borrowingAmount,
+                            placeholder: "Borrowing Amount",
+                            promptText: "",
+                            isSecure: false)
+                            .textFieldStyle(
+                                GradientTextFieldBackground(
+                                    systemImageString: "creditcard.circle.fill",
+                                    currencyField: true,
+                                    colorList: [.black],
+                                    value: $borrowingAmount))
+                            .numbersOnly($borrowingAmount, includeDecimal: true, digitAllowedAfterDecimal: 2)
+                        
+                        EntryField(bindingField: $annualInterestRate, placeholder: "Annual Interest Rate %", promptText: "", isSecure: false)
+                    }
+                    .tint(.cyan)
+                    
+                    GroupBox("Term Detail"){
+                        
+                        Text(Locale.current.currency?.identifier ?? "LKR")
+                    }
+                    
+                    GroupBox("Payment Detail"){
+                        
+                    }
+                }
+                .offset(y: 40)
             }
             .navigationTitle("Loan Calculator")
             .navigationBarTitleDisplayMode(.inline)

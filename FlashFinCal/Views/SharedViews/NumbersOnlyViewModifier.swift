@@ -68,31 +68,60 @@ struct NumbersOnlyViewModifier: ViewModifier {
                 if includeDecimal {
                     numbers += decimalSeparator
                 }
+               
                 if newValue.components(separatedBy: decimalSeparator).count-1 > 1 {
+                   
                     let filtered = newValue
                     self.text = isValid(newValue: String(filtered.dropLast()), decimalSeparator: decimalSeparator)
+          
                 } else {
-                    let filtered = newValue.filter { numbers.contains($0)}
+                   let filtered = newValue.filter { numbers.contains($0)}
                     if filtered != newValue {
+         
                         self.text = isValid(newValue: filtered, decimalSeparator: decimalSeparator)
+                        
                     } else {
+                      
                         self.text = isValid(newValue: newValue, decimalSeparator: decimalSeparator)
+                        
                     }
                 }
+                self.text = formatDouble(text)
+               
             }
     }
     
     private func isValid(newValue: String, decimalSeparator: String) -> String {
-        guard includeDecimal, !text.isEmpty else { return newValue }
+        
+        print(newValue)
+        guard includeDecimal, !text.isEmpty else { print("guare"); return newValue }
+        
         let component = newValue.components(separatedBy: decimalSeparator)
+        print(component.count)
         if component.count > 1 {
+            print("here")
             guard let last = component.last else { return newValue }
             if last.count > digitAllowedAfterDecimal {
                 let filtered = newValue
+                print(filtered)
                return String(filtered.dropLast())
             }
         }
         return newValue
+    }
+    
+    func formatDouble(_ input : String) -> String {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            //formatter.maximumFractionDigits = digitAllowedAfterDecimal
+            
+            // If the String can't be cast as a Double return ""
+            guard let resultAsDouble = Double(input) else {
+                return ""
+            }
+
+        let result = formatter.string(from: NSNumber(value: resultAsDouble)) ?? ""
+                return result
     }
 }
 

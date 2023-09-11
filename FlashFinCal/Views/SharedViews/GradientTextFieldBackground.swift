@@ -11,9 +11,11 @@ import SwiftUI
 struct GradientTextFieldBackground: TextFieldStyle {
     
     let systemImageString: String?
+    let currencyCode: String = Locale.current.currency?.identifier ?? "USD"
+    let currencyField: Bool
     let colorList: [Color]
     let buttonImageString = "xmark"
-    var action: (() -> Void)
+    @Binding var value: String
     
     // Hidden function to conform to this protocol
     func _body(configuration: TextField<Self._Label>) -> some View {
@@ -33,6 +35,10 @@ struct GradientTextFieldBackground: TextFieldStyle {
                 if let value = systemImageString{
                     Image(systemName: value)
                 }
+                
+                if currencyField {
+                    Text(currencyCode)
+                }
                 // Reference the TextField here
                 configuration
                 
@@ -40,7 +46,7 @@ struct GradientTextFieldBackground: TextFieldStyle {
                     .frame(height: 40)
                 
                 Button{
-                    action()
+                    value = ""
                 }label: {
                     Image(systemName: buttonImageString)
                 }

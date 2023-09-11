@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 struct AppCustomColors {
     static let lightYellow = Color("LightYellow")
+    static let lightBlue = Color("LightBlue")
     //    static let gradientLower = Color("GradientLowerColor")
     //    static let primaryColor = Color("PrimaryColor")
     //    static let secondaryColor = Color("SecondaryColor")
